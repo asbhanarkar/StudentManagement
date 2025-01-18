@@ -3,6 +3,7 @@ package com.aditya.StudentManagementApp.service;
 
 import com.aditya.StudentManagementApp.shared.dto.Student;
 import com.aditya.StudentManagementApp.repository.StudentRepository;
+import com.aditya.StudentManagementApp.shared.exception.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,12 +41,16 @@ public class StudentServiceImpl implements StudentService {
             student.setStudentClass(updatedStudent.getStudentClass());
             student.setPhoneNumber(updatedStudent.getPhoneNumber());
             return studentRepository.save(student);
-        }).orElseThrow(() -> new RuntimeException("Student not found"));
+        }).orElseThrow(() -> new StudentNotFoundException("Student with ID "+ id +" not found"));
     }
 
     @Override
 //    @CacheEvict(value = "students", key = "#id")
     public void deleteStudent(Long id) {
+
+        if(!studentRepository.existsById(id)){
+            throw new StudentNotFoundException("Student with ID "+ id +" not found");
+        }
         studentRepository.deleteById(id);
     }
 }
