@@ -1,6 +1,8 @@
 package com.aditya.StudentManagementApp.service;
 
-import com.example.studentmanagement.model.Student;
+
+
+import com.aditya.StudentManagementApp.shared.dto.Student;
 
 import java.util.List;
 

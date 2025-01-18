@@ -1,4 +1,4 @@
-package com.aditya.StudentManagementApp.model;
+package com.aditya.StudentManagementApp.shared.dto;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

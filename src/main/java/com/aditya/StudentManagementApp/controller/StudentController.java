@@ -1,9 +1,12 @@
 package com.aditya.StudentManagementApp.controller;
 
-import com.example.studentmanagement.model.Student;
-import com.example.studentmanagement.service.StudentService;
+
+import com.aditya.StudentManagementApp.shared.Constants;
+import com.aditya.StudentManagementApp.shared.dto.Student;
+import com.aditya.StudentManagementApp.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,28 +20,32 @@ public class StudentController {
 
 
     @GetMapping("/")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<List<Student>> getAllStudents() {
+        List<Student> students=  studentService.getAllStudents();
+        return ResponseEntity.ok(students);
     }
 
     @GetMapping("/search")
-    public List<Student> searchStudents(@RequestParam String name) {
-        return studentService.searchStudentsByName(name);
+    public ResponseEntity<List<Student>> searchStudents(@RequestParam String name) {
+        List<Student> students= studentService.searchStudentsByName(name);
+        return ResponseEntity.ok(students);
     }
 
     @PostMapping("/add")
-    public Student addStudent(@Valid @RequestBody Student student) {
-        return studentService.addStudent(student);
+    public ResponseEntity<Student> addStudent(@Valid @RequestBody Student student) {
+        Student std = studentService.addStudent(student);
+        return ResponseEntity.ok(std);
     }
 
     @PutMapping("/update/{id}")
-    public Student updateStudent(@PathVariable Long id, @Valid @RequestBody Student student) {
-        return studentService.updateStudent(id, student);
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @Valid @RequestBody Student student) {
+        Student std = studentService.updateStudent(id, student);
+        return ResponseEntity.ok(std);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
-        return "Student deleted successfully";
+        return ResponseEntity.ok(Constants.STUDENT_DELETED_SUCCESSFULLY);
     }
 }

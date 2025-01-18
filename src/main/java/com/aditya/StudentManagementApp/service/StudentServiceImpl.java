@@ -1,7 +1,8 @@
 package com.aditya.StudentManagementApp.service;
 
-import com.example.studentmanagement.model.Student;
-import com.example.studentmanagement.repository.StudentRepository;
+
+import com.aditya.StudentManagementApp.shared.dto.Student;
+import com.aditya.StudentManagementApp.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
